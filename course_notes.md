@@ -41,3 +41,11 @@ tensorflow.config.list_physical_devices()
 ## To check for VGA cards on your machine (Linux)
 
 sudo lspci | grep VGA
+
+## Matplotlib error when plotting
+
+UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
+
+## To resolve the above error install pyqt5 using:
+
+pip install pyqt5
