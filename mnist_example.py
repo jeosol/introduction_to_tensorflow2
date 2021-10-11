@@ -88,7 +88,7 @@ def run_model_with_sparse_labels(model, x_train, y_train, x_test, y_test):
 
         return model
 
-def run_model_with_onehot_labels(model):
+def run_model_with_onehot_labels(model, x_train, y_train, x_test, y_test):
     """Run the neural network model with one-hot encoded labels."""    
     if model:
         # conver the target labels to one-hot encoded equivalents
