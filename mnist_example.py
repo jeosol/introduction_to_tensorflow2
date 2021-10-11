@@ -10,32 +10,34 @@ from tensorflow.keras.layers import Conv2D, Input, Dense, MaxPool2D, BatchNormal
 # 3. tensorflow.keras.Model: inherit from base class and override some methods
 
 # 1. Using tensorflow.keras.Sequential model
-model = tensorflow.keras.Sequential(
-    [
-        Input(shape=(28,28,1)),
-        # create 32 filters, each filter of size 3x3 (these are hyperparameters used for now)
-        Conv2D(32, (3, 3), activation='relu'),
-        Conv2D(64, (3, 3), activation='relu'),
-        # MaxPool downsamples the input along its spatial dimensions height, and width, default pool_size = 2,2
-        MaxPool2D(),
-        BatchNormalization(),
+def create_sequential_model():
+    model = tensorflow.keras.Sequential(
+        [
+            Input(shape=(28,28,1)),
+            # create 32 filters, each filter of size 3x3 (these are hyperparameters used for now)
+            Conv2D(32, (3, 3), activation='relu'),
+            Conv2D(64, (3, 3), activation='relu'),
+            # MaxPool downsamples the input along its spatial dimensions height, and width, default pool_size = 2,2
+            MaxPool2D(),
+            BatchNormalization(),
 
-        Conv2D(128, (3, 3), activation='relu'),        
-        # MaxPool downsamples the input along its spatial dimensions height, and width, default pool_size = 2,2
-        MaxPool2D(),
-        # batch normalization activations to help with the gradient descent
-        BatchNormalization(),
+            Conv2D(128, (3, 3), activation='relu'),        
+            # MaxPool downsamples the input along its spatial dimensions height, and width, default pool_size = 2,2
+            MaxPool2D(),
+            # batch normalization activations to help with the gradient descent
+            BatchNormalization(),
 
-        GlobalAvgPool2D(),
-        Dense(64, activation='relu'),
-        # Number units in the output later is 10, because we have 0-9 classes
-        # look at the probabilities of the output, that determines the predicted class
-        Dense(10, activation='softmax'),
-    ]
-)
+            GlobalAvgPool2D(),
+            Dense(64, activation='relu'),
+            # Number units in the output later is 10, because we have 0-9 classes
+            # look at the probabilities of the output, that determines the predicted class
+            Dense(10, activation='softmax'),
+        ]
+    )
+    return model
 
 # function form is more flexible that the sequential form, and it is recommended
-def function_model():
+def create_function_model():
     my_input = Input(shape=(28,28,1))
     # create 32 filters, each filter of size 3x3 (these are hyperparameters used for now)
     x = Conv2D(32, (3, 3), activation='relu')(my_input)
@@ -99,8 +101,9 @@ if __name__ == '__main__':
     x_train = np.expand_dims(x_train, axis=-1)
     x_test = np.expand_dims(x_test, axis=-1)
 
-    model = function_model()
-
+   
+    model = create_sequential_model()
+    #model = create_function_model()
     #print('x_train.shape = ', x_train.shape)    
     #print('x_test.shape  = ', x_test.shape)    
     # loss for classification = crossentropy: specific examples are
