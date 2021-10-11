@@ -77,6 +77,32 @@ def display_some_examples(examples, labels):
 
     plt.show()
 
+def run_model_with_sparse_labels(model, x_train, y_train, x_test, y_test):
+    """Run the neural network model with sparse labels."""
+    if model:
+        model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics='accuracy')
+
+        model.fit(x_train, y_train, batch_size=64, epochs=1, validation_split=0.2)
+
+        model.evaluate(x_test, y_test, batch_size=64)
+
+        return model
+
+def run_model_with_onehot_labels(model):
+    """Run the neural network model with one-hot encoded labels."""    
+    if model:
+        # conver the target labels to one-hot encoded equivalents
+        y_train = tensorflow.keras.utils.to_categorical(y_train, 10)
+        y_test  = tensorflow.keras.utils.to_categorical(y_test, 10)
+
+        model.compile(optimizer='adam', loss='categorical_crossentropy', metrics='accuracy')
+
+        model.fit(x_train, y_train, batch_size=64, epochs=1, validation_split=0.2)
+
+        model.evaluate(x_test, y_test, batch_size=64)
+
+        return model
+
 # This part is not called if this script is imported
 if __name__ == '__main__':
     #print(tensorflow.config.list_physical_devices())
@@ -101,27 +127,11 @@ if __name__ == '__main__':
     x_train = np.expand_dims(x_train, axis=-1)
     x_test = np.expand_dims(x_test, axis=-1)
 
-   
-    model = create_sequential_model()
-    #model = create_function_model()
-    #print('x_train.shape = ', x_train.shape)    
-    #print('x_test.shape  = ', x_test.shape)    
-    # loss for classification = crossentropy: specific examples are
-    # binarycrossentropy, categoricalcrossentropy, sparsecategoricalcrossentropy
-    # sparse_categorical_crossentropy = when labels contain single values that indicates the class label directory
-    # categorical_crossentropy = labels are one hot encoding and each label is a vector with a one at the right class index
-    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics='accuracy')
-    # one epoch - when the model has all the data once
-    # Splits of the data: train, validation, test
-    # train, validation are used to model train using train, and validation is used for hyperparameter tuning
-    # 80% used for training, and 20% used for validation
-    model.fit(x_train, y_train, batch_size=64, epochs=1, validation_split=0.2)
-
-    # Evaluate the model on the test set - determine how the model performs on data it has never seen.
-    model.evaluate(x_test, y_test, batch_size=64)
-
-    # to use the categorical_crossentropy, we need to convert the labels to one hot encoding equivalents
-    # y_train = tensorflow.keras.utils.to_categorical(y_train, 10)
-    # y_test  = tensorflow.keras.utils.to_categorical(y_test, 10)
-    # then we have the loss be categorical_crossentropy
-    # model.compile(optimizer='adam', loss='categorical_crossentropy', metrics='accuracy')
+    # create the neural network model
+    model1 = create_sequential_model()
+    model2 = create_sequential_model()
+    # run the neural network model 
+    modelv1 = run_model_with_sparse_labels(model1, x_train, y_train, x_test, y_test)
+    # run the neural network model with one-hot encoded labels
+    modelv2 = run_model_with_onehot_labels(model2, x_train, y_train, x_test, y_test)
+    
