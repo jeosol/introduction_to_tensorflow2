@@ -113,9 +113,8 @@ if __name__ == '__main__':
     print('y_train.shape = ', y_train.shape)
     print('x_test.shape  = ', x_test.shape)
     print('y_test.shape  = ', y_test.shape)
-
-    if False:
-        display_some_examples(x_train, y_train)
+    
+    # display_some_examples(x_train, y_train)
 
     # normalize the dataset, need to convert the data to float32 format so we can get fractional numbers
     x_train = x_train.astype('float32') / 255
