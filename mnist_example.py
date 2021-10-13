@@ -135,6 +135,7 @@ if __name__ == '__main__':
     modelv2 = run_model_with_onehot_labels(model2, x_train, y_train, x_test, y_test)
     
     # both the sparse_labels and onehot_labels generate returns similar results as shown below:
+    # the loss and accuracy are similar in both cases and this is expected
     # results from run_model_with_sparse_labels(...)
     #750/750 [==============================] - 49s 64ms/step - loss: 0.2348 - accuracy: 0.9362 - val_loss: 0.1596 - val_accuracy: 0.9525
     #157/157 [==============================] - 2s 12ms/step - loss: 0.1586 - accuracy: 0.9511
