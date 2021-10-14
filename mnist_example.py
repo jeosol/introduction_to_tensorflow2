@@ -11,7 +11,7 @@ from tensorflow.keras.layers import Conv2D, Input, Dense, MaxPool2D, BatchNormal
 
 # Method 1
 # Using tensorflow.keras.Sequential model
-def create_sequential_model():
+def create_sequential_nn_model():
     model = tensorflow.keras.Sequential(
         [
             Input(shape=(28,28,1)),
@@ -39,7 +39,7 @@ def create_sequential_model():
 
 # Method 2
 # function form is more flexible that the sequential form, and it is recommended
-def create_function_model():
+def create_function_nn_model():
     my_input = Input(shape=(28,28,1))
     # create 32 filters, each filter of size 3x3 (these are hyperparameters used for now)
     x = Conv2D(32, (3, 3), activation='relu')(my_input)
@@ -100,7 +100,7 @@ class MyCustomModel(tensorflow.keras.Model):
 
         return x
 
-def function_class_model():
+def create_classbased_nn_model():
     return MyCustomModel()
 
 def display_some_examples(examples, labels):
@@ -169,13 +169,17 @@ if __name__ == '__main__':
 
     # create the neural network model
     # sequential model
-    # model1 = create_sequential_model()
-    # model2 = create_sequential_model()
+    # model1 = create_sequential_nn_model()
+    # model2 = create_sequential_nn_model()
 
     # functional model
-    model1 = create_function_model()
-    model2 = create_function_model()
+    # model1 = create_function_nn_model()
+    # model2 = create_function_nn_model()
 
+    # class-based model
+    model1 = create_classbased_nn_model()
+    model2 = create_classbased_nn_model()
+    
     # run the neural network model 
     modelv1 = run_model_with_sparse_labels(model1, x_train, y_train, x_test, y_test)
     # run the neural network model with one-hot encoded labels
@@ -196,4 +200,9 @@ if __name__ == '__main__':
 
     # ----------------------------------
     # Results from the functional model
+    # ----------------------------------
+    
+
+    # ----------------------------------
+    # Results from using the class-based model
     # ----------------------------------
