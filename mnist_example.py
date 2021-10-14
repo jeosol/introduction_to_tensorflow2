@@ -4,12 +4,13 @@ import numpy as np
 # import some layers used for computer vision tasks
 from tensorflow.keras.layers import Conv2D, Input, Dense, MaxPool2D, BatchNormalization, GlobalAvgPool2D
 
-# methods to build neural network layers
+# Illustrate different methods to build neural network model
 # 1. use tensorflow.keras.Sequential
 # 2. functional approach: function that returns a model
 # 3. tensorflow.keras.Model: inherit from base class and override some methods
 
-# 1. Using tensorflow.keras.Sequential model
+# Method 1
+# Using tensorflow.keras.Sequential model
 def create_sequential_model():
     model = tensorflow.keras.Sequential(
         [
@@ -36,6 +37,7 @@ def create_sequential_model():
     )
     return model
 
+# Method 2
 # function form is more flexible that the sequential form, and it is recommended
 def create_function_model():
     my_input = Input(shape=(28,28,1))
@@ -61,6 +63,8 @@ def create_function_model():
     model = tensorflow.keras.Model(inputs=my_input, outputs=x)
 
     return model
+
+
 
 def display_some_examples(examples, labels):
     plt.figure(figsize=(10,10))
