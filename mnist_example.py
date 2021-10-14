@@ -3,9 +3,6 @@ import tensorflow
 import numpy as np
 from deeplearning_models import create_sequential_nn_model, create_function_nn_model, create_classbased_nn_model, run_model_with_onehot_labels, run_model_with_sparse_labels
 
-
-
-
 # This part is not called if this script is imported
 if __name__ == '__main__':
     #print(tensorflow.config.list_physical_devices())
@@ -27,7 +24,7 @@ if __name__ == '__main__':
     # we can use np.exand_dims(x_train, axis=3) or better to use axis=-1, as in expand after last axes
     # this transformation allows the images to be in the right form for the images
     x_train = np.expand_dims(x_train, axis=-1)
-    x_test = np.expand_dims(x_test, axis=-1)
+    x_test  = np.expand_dims(x_test, axis=-1)
 
     # create the neural network model
     # sequential model
