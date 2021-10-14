@@ -1,7 +1,6 @@
 import tensorflow
 from tensorflow.keras.layers import Conv2D, Input, Dense, MaxPool2D, BatchNormalization, GlobalAvgPool2D
 
-
 # Illustrate different methods to build neural network model and architecture
 # 1. use tensorflow.keras.Sequential
 # 2. functional approach: function that returns a model
@@ -100,8 +99,6 @@ class MyCustomModel(tensorflow.keras.Model):
 
 def create_classbased_nn_model():
     return MyCustomModel()
-
-
 
 def run_model_with_sparse_labels(model, x_train, y_train, x_test, y_test):
     """Run the neural network model with sparse labels."""
