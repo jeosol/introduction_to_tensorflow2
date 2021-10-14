@@ -102,7 +102,7 @@ class MyCustomModel(tensorflow.keras.Model):
 
 def function_class_model():
     return MyCustomModel()
-    
+
 def display_some_examples(examples, labels):
     plt.figure(figsize=(10,10))
     
@@ -168,8 +168,14 @@ if __name__ == '__main__':
     x_test = np.expand_dims(x_test, axis=-1)
 
     # create the neural network model
-    model1 = create_sequential_model()
-    model2 = create_sequential_model()
+    # sequential model
+    # model1 = create_sequential_model()
+    # model2 = create_sequential_model()
+
+    # functional model
+    model1 = create_function_model()
+    model2 = create_function_model()
+
     # run the neural network model 
     modelv1 = run_model_with_sparse_labels(model1, x_train, y_train, x_test, y_test)
     # run the neural network model with one-hot encoded labels
@@ -177,6 +183,9 @@ if __name__ == '__main__':
     
     # both the sparse_labels and onehot_labels generate returns similar results as shown below:
     # the loss and accuracy are similar in both cases and this is expected
+    # ----------------------------------
+    # Results from the sequential model
+    # ----------------------------------
     # results from run_model_with_sparse_labels(...)
     #750/750 [==============================] - 49s 64ms/step - loss: 0.2348 - accuracy: 0.9362 - val_loss: 0.1596 - val_accuracy: 0.9525
     #157/157 [==============================] - 2s 12ms/step - loss: 0.1586 - accuracy: 0.9511
@@ -184,3 +193,7 @@ if __name__ == '__main__':
     # results from run_model_with_onehot_labes(...)
     #750/750 [==============================] - 45s 60ms/step - loss: 0.2344 - accuracy: 0.9361 - val_loss: 0.1666 - val_accuracy: 0.9512
     #157/157 [==============================] - 2s 12ms/step - loss: 0.1597 - accuracy: 0.9518
+
+    # ----------------------------------
+    # Results from the functional model
+    # ----------------------------------
