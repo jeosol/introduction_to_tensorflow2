@@ -88,7 +88,7 @@ class MyCustomModel(tensorflow.keras.Model):
         x = self.conv1(my_input)
         x = self.conv2(x)
         x = self.maxpool1(x)
-        x = self.batchnorm1
+        x = self.batchnorm1(x)
 
         x = self.conv3(x)
         x = self.maxpool2(x)
@@ -179,7 +179,7 @@ if __name__ == '__main__':
     # class-based model
     model1 = create_classbased_nn_model()
     model2 = create_classbased_nn_model()
-    
+
     # run the neural network model 
     modelv1 = run_model_with_sparse_labels(model1, x_train, y_train, x_test, y_test)
     # run the neural network model with one-hot encoded labels
