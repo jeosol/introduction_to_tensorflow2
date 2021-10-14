@@ -64,8 +64,45 @@ def create_function_model():
 
     return model
 
+# Method 3
+# Inherit from tensorflow.keras.Model
+class MyCustomModel(tensorflow.keras.Model):
+    def __init__(self):
+        super().__init__() # call the __init__ function of the base class
 
+        # Create the layers and name them
+        self.conv1 = Conv2D(32, (3,3), activation='relu')
+        self.conv2 = Conv2D(64, (3,3), activation='relu')
+        self.maxpool1 = MaxPool2D()
+        self.batchnorm1 = BatchNormalization()
 
+        self.conv3 = Conv2D(128, (3,3), activation='relu')
+        self.maxpool2 = MaxPool2D()
+        self.batchnorm2 = BatchNormalization()
+
+        self.globalavgpool1 = GlobalAvgPool2D()
+        self.dense1 = Dense(64, activation='relu')
+        self.dense2 = Dense(10, activation='softmax')
+
+    def call(self, my_input):
+        x = self.conv1(my_input)
+        x = self.conv2(x)
+        x = self.maxpool1(x)
+        x = self.batchnorm1
+
+        x = self.conv3(x)
+        x = self.maxpool2(x)
+        x = self.batchnorm2(x)
+
+        x = self.globalavgpool1(x)
+        x = self.dense1(x)
+        x = self.dense2(x)
+
+        return x
+
+def function_class_model():
+    return MyCustomModel()
+    
 def display_some_examples(examples, labels):
     plt.figure(figsize=(10,10))
     
