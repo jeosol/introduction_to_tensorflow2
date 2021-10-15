@@ -3,7 +3,7 @@ import tensorflow
 import numpy as np
 from deeplearning_models import create_sequential_nn_model, create_function_nn_model, create_classbased_nn_model, run_model_with_onehot_labels, run_model_with_sparse_labels
 
-# This part is not called if this script is imported
+# Run the file as a script
 if __name__ == '__main__':
     #print(tensorflow.config.list_physical_devices())
     # Load the training and test data set
