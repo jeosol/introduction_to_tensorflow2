@@ -2,9 +2,9 @@ import tensorflow
 from tensorflow.keras.layers import Conv2D, Input, Dense, MaxPool2D, BatchNormalization, GlobalAvgPool2D
 
 # Illustrate different methods to build neural network model and architecture
-# 1. use tensorflow.keras.Sequential
-# 2. functional approach: function that returns a model
-# 3. tensorflow.keras.Model: inherit from base class and override some methods
+# 1. Building neural network model using tensorflow.keras.Sequential
+# 2. Building neural network model using the functional approach
+# 3. Building neural network model by inheriting from the tensorflow.keras.Model class
 
 # Method 1
 # Using tensorflow.keras.Sequential model
