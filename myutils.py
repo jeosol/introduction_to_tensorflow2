@@ -1,10 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def display_some_examples(examples, labels):
+def display_some_examples(examples, labels, num_images=25):
     plt.figure(figsize=(10,10))
     
-    for i in range(25):
+    for i in range(num_images):
         idx = np.random.randint(0, examples.shape[0]-1)
         img = examples[idx]
         label = labels[idx]
