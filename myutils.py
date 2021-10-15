@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import os
 import glob
 import shutil
+import csv
 
 from sklearn.model_selection import train_test_split
 
@@ -50,3 +51,29 @@ def split_data(path_to_data, path_to_save_train, path_to_save_val, split_size=0.
             print(f'copying validation data to folder {path_to_folder}')
             shutil.copy(x, path_to_folder)
 
+def order_test_set(path_to_save_test, path_to_images, path_to_csv):
+    if not os.path.isdir(path_to_save_test):
+        os.makedirs(path_to_save_test)
+    print(path_to_csv)
+    try:
+        with open(path_to_csv, 'r') as csvfile:
+
+            reader = csv.reader(csvfile, delimiter=',')
+
+            for i, row in enumerate(reader):
+                if i == 0:
+                    continue
+                img_name = row[-1].replace('Test/', '')
+                label    = row[-2]
+                
+                path_to_folder = os.path.join(path_to_save_test, label)
+
+                if not os.path.isdir(path_to_folder):
+                    os.makedirs(path_to_folder)
+
+                img_full_path = os.path.join(path_to_images, f'{label}/{img_name}')
+                
+                print(f'Copying test data to folder {path_to_folder}')
+                shutil.copy(img_full_path, path_to_folder)
+    except:
+        print('[INFO]: Reading csv file')
