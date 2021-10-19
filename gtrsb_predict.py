@@ -15,7 +15,7 @@ def predict_with_model(model, img_path):
 
     return predictions
 
-if __name__ == '__main__':
+def main():
     img_path = "/home/onwunalu/data/datasets/machine-learning/gtrsb/test_data/2/00409.png"
     img_path = "/home/onwunalu/data/datasets/machine-learning/gtrsb/test_data/0/00807.png"
     model    = tf.keras.models.load_model('./results/models')
@@ -23,3 +23,6 @@ if __name__ == '__main__':
     prediction = predict_with_model(model, img_path)
 
     print(f'prediction = {prediction}')
+
+if __name__ == '__main__':
+    main()
