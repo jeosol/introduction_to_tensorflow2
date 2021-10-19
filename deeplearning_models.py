@@ -1,5 +1,6 @@
 import tensorflow
-from tensorflow.keras.layers import Conv2D, Input, Dense, MaxPool2D, BatchNormalization, GlobalAvgPool2D
+from tensorflow.keras.layers import Conv2D, Input, Dense, MaxPool2D, BatchNormalization, GlobalAvgPool2D, Flatten
+from tensorflow.keras import Model
 
 # Illustrate different methods to build neural network model and architecture
 # 1. Building neural network model using tensorflow.keras.Sequential
@@ -125,3 +126,43 @@ def run_model_with_onehot_labels(model, x_train, y_train, x_test, y_test):
         model.evaluate(x_test, y_test, batch_size=64)
 
         return model
+
+
+# create model for the GTRSB using the functional model
+
+def street_signs_model(nbr_classes):
+    # shape represents W, L, H
+    # May need to compute the mean of the W, L, H of all the images use them below
+    my_input = Input(shape=(60,60, 3))            
+    # create 32 filters, each filter of size 3x3 (these are hyperparameters used for now)
+    x = Conv2D(32, (3, 3), activation='relu')(my_input)
+    x = MaxPool2D()(x)
+    x = BatchNormalization()(x)
+
+    x = Conv2D(64, (3, 3), activation='relu')(x)
+    # MaxPool downsamples the input along its spatial dimensions height, and width, default pool_size = 2,2
+    x = MaxPool2D()(x)
+    x = BatchNormalization()(x)
+
+    x = Conv2D(128, (3, 3), activation='relu')(x)
+    # MaxPool downsamples the input along its spatial dimensions height, and width, default pool_size = 2,2
+    x = MaxPool2D()(x)
+    # batch normalization activations to help with the gradient descent
+    x = BatchNormalization()(x)
+
+    # flatten all the values coming from the previous layers
+    x = Flatten()(x)
+    #x = GlobalAvgPool2D()(x)
+    x = Dense(128, activation='relu')(x)
+    # Number units in the output later is 10, because we have 0-9 classes
+    # look at the probabilities of the output, that determines the predicted class
+    x = Dense(nbr_classes, activation='softmax')(x)
+
+    model = tensorflow.keras.Model(inputs=my_input, outputs=x)
+
+    return model
+
+if __name__ == '__main__':
+    model = street_signs_model(10)
+    model.summary()
+

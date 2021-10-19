@@ -1,4 +1,5 @@
 from myutils import split_data, order_test_set
+from deeplearning_models import street_signs_model
 
 if __name__ == "__main__":
     path_to_data = '/home/onwunalu/data/datasets/machine-learning/gtrsb/Train'
