@@ -151,6 +151,7 @@ def street_signs_model(nbr_classes):
     x = BatchNormalization()(x)
 
     # flatten all the values coming from the previous layers
+    # can experiment between Flatten and GlobalAvgPool2D below to see which ones gives the better results
     x = Flatten()(x)
     #x = GlobalAvgPool2D()(x)
     x = Dense(128, activation='relu')(x)
