@@ -19,9 +19,9 @@ if __name__ == "__main__":
     path_to_train = '/home/onwunalu/data/datasets/machine-learning/gtrsb/training_data/train'
     path_to_val   = '/home/onwunalu/data/datasets/machine-learning/gtrsb/training_data/val'
     path_to_test  = '/home/onwunalu/data/datasets/machine-learning/gtrsb/test_data/'
-    batch_size = 64 # this is hyperparameter, can be varied, use smaller batch sizes if we get errors
-    epochs = 1
-    learning_rate=0.0001 # another hyperparameter
+    batch_size    = 64 # this is hyperparameter, can be varied, use smaller batch sizes if we get errors
+    epochs        = 1
+    learning_rate =0.0001 # another hyperparameter to the optimizer
 
     train_generator, val_generator, test_generator = create_generators(batch_size, path_to_train, path_to_val, path_to_test)
     nbr_classes = train_generator.num_classes
@@ -29,6 +29,7 @@ if __name__ == "__main__":
     # need to save the model during training, so we use callbacks
     path_to_save_model = './models/'
 
+    # set modes for calling the script
     TRAIN = False
     TEST  = True
 
