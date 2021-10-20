@@ -27,7 +27,7 @@ if __name__ == "__main__":
     nbr_classes = train_generator.num_classes
 
     # need to save the model during training, so we use callbacks
-    path_to_save_model = './results/models/'
+    path_to_save_model = './models/'
 
     TRAIN = False
     TEST  = True
