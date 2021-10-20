@@ -68,7 +68,7 @@ if __name__ == "__main__":
 
     if TEST:
         # Evaluate the dataset using the save model 
-        model = tf.keras.models.load_model('./results/models')
+        model = tf.keras.models.load_model('./models')
         model.summary()
 
         print('Evaluating the validation set:')

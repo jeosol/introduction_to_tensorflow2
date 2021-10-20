@@ -18,7 +18,7 @@ def predict_with_model(model, img_path):
 def main():
     img_path = "/home/onwunalu/data/datasets/machine-learning/gtrsb/test_data/2/00409.png"
     img_path = "/home/onwunalu/data/datasets/machine-learning/gtrsb/test_data/0/00807.png"
-    model    = tf.keras.models.load_model('./results/models')
+    model    = tf.keras.models.load_model('./models')
 
     prediction = predict_with_model(model, img_path)
 
