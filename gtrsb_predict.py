@@ -10,16 +10,16 @@ def predict_with_model(model, img_path):
     image = tf.image.resize(image, [60,60]) # resize the image, shape is 60,60,3
     image = tf.expand_dims(image, axis=0) # shape is (1, 60, 60, 3) 
 
-    predictions = model.predict(image) # return list of probabilities = [0.001, 0.002, 0.99, 0.000, ...]
-    predictions = np.argmax(predictions)
+    prediction = model.predict(image) # return list of probabilities = [0.001, 0.002, 0.99, 0.000, ...]
+    prediction = np.argmax(prediction)
 
-    return predictions
+    return prediction
 
 def main():
     img_path = "/home/onwunalu/data/datasets/machine-learning/gtrsb/test_data/2/00409.png"
     img_path = "/home/onwunalu/data/datasets/machine-learning/gtrsb/test_data/0/00807.png"
     model    = tf.keras.models.load_model('./models')
-
+    # call model to get prediction of model
     prediction = predict_with_model(model, img_path)
 
     print(f'prediction = {prediction}')
