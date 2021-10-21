@@ -18,11 +18,13 @@ def predict_with_model(model, img_path, resize=[60,60], channels=3):
 def main():
     img_path = "/home/onwunalu/data/datasets/machine-learning/gtrsb/test_data/2/00409.png"
     img_path = "/home/onwunalu/data/datasets/machine-learning/gtrsb/test_data/0/00807.png"
+    # Load the save models
     model    = tf.keras.models.load_model('./models')
     # call model to get prediction of model
-    prediction = predict_with_model(model, img_path)
+    if model:
+        prediction = predict_with_model(model, img_path)
 
-    print(f'prediction = {prediction}')
+        print(f'prediction = {prediction}')
 
 if __name__ == '__main__':
     main()
