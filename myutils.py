@@ -81,7 +81,7 @@ def order_test_set(path_to_save_test, path_to_images, path_to_csv):
         print('[INFO]: Reading csv file')
 
 # create different generators for the different datasets
-def create_generators(batch_size, train_data_path, val_data_path, test_data_path):
+def create_generators(batch_size, train_data_path, val_data_path, test_data_path, target_size=(60,60)):
 
     preprocessor = ImageDataGenerator(
         rescale= 1 / 255
@@ -90,7 +90,7 @@ def create_generators(batch_size, train_data_path, val_data_path, test_data_path
     train_generator = preprocessor.flow_from_directory(
         train_data_path,
         class_mode='categorical',
-        target_size=(60,60),
+        target_size=target_size,
         color_mode='rgb',
         shuffle=True,  # randomness more important here for the training generator
         batch_size=batch_size
@@ -99,7 +99,7 @@ def create_generators(batch_size, train_data_path, val_data_path, test_data_path
     val_generator = preprocessor.flow_from_directory(
         val_data_path,
         class_mode='categorical',
-        target_size=(60,60),
+        target_size=target_size,
         color_mode='rgb',
         shuffle=False,
         batch_size=batch_size
@@ -108,7 +108,7 @@ def create_generators(batch_size, train_data_path, val_data_path, test_data_path
     test_generator = preprocessor.flow_from_directory(
         test_data_path,
         class_mode='categorical',
-        target_size=(60,60),
+        target_size=target_size,
         color_mode='rgb',
         shuffle=False,
         batch_size=batch_size
